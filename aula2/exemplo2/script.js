@@ -1,31 +1,34 @@
-// Primeiro, pegamos a referência do botão e do container do nosso HTML
+// As referências para o botão e o container continuam as mesmas
 const botao = document.getElementById('botao-carregar');
 const container = document.getElementById('conteudo-ajax');
 
-// Adicionamos um "ouvinte de evento" que irá disparar uma função quando o botão for clicado
 botao.addEventListener('click', function() {
-
-    // 1. Criar o objeto XMLHttpRequest (o objeto AJAX)
     const ajax = new XMLHttpRequest();
 
-    // 2. Abrir a conexão, especificando o método (GET) e o arquivo a ser buscado
-    // 'true' no final indica que a requisição será assíncrona.
-    ajax.open('GET', 'conteudo.txt', true);
+    // Alteramos o nome do arquivo que queremos buscar para "dados.json"
+    ajax.open('GET', 'dados.json', true);
 
-    // 3. Definir o que acontece quando a requisição for completada e a resposta chegar
-    // Usamos o evento 'onload', que é disparado quando a resposta é recebida com sucesso.
     ajax.onload = function() {
-        // Verificamos se o status da requisição é 200, que significa "OK" (sucesso)
         if (ajax.status === 200) {
-            // Se deu tudo certo, colocamos a resposta (em formato de texto) dentro da nossa div [cite: 365]
-            container.innerHTML = ajax.responseText;
+            // A resposta (ajax.responseText) ainda é uma STRING, mas agora no formato JSON.
+            // Precisamos convertê-la para um objeto JavaScript para poder usar os dados.
+            // Para isso, usamos o método JSON.parse()
+            const dados = JSON.parse(ajax.responseText);
+
+            // Agora 'dados' é um objeto e podemos acessar suas propriedades (nome, email, etc.)
+            // Vamos formatar a saída em HTML para exibir os dados de forma organizada.
+            container.innerHTML = `
+                <h3>Dados do Usuário:</h3>
+                <p><strong>Nome:</strong> ${dados.nome}</p>
+                <p><strong>Email:</strong> ${dados.email}</p>
+                <p><strong>Curso:</strong> ${dados.curso}</p>
+                <p><strong>Status:</strong> ${dados.ativo ? 'Ativo' : 'Inativo'}</p>
+            `;
         } else {
-            // Se ocorreu algum erro, informamos no container
-            container.innerHTML = 'Ocorreu um erro ao carregar o arquivo.';
+            // A mensagem de erro permanece a mesma
+            container.innerHTML = 'Ocorreu um erro ao carregar os dados.';
         }
     };
 
-    // 4. Enviar a requisição ao servidor
-    // Como estamos apenas buscando dados (GET), enviamos null.
     ajax.send(null);
 });

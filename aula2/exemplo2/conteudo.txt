@@ -1,6 +1,0 @@
-Olá!
-Este conteúdo foi carregado de um arquivo externo
-de forma assíncrona utilizando AJAX.
-
-Isso permite que a página seja atualizada
-dinamicamente sem precisar recarregar.
