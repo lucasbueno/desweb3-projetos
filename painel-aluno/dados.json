@@ -1,0 +1,10 @@
+{
+    "nome": "João Silva",
+    "nota": 8.5,
+    "materias": [
+        "Matemática",
+        "Português",
+        "História"
+    ],
+    "matriculado": true
+}

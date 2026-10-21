@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aula: AJAX e JSON</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Painel do Aluno (Integração AJAX)</h1>
+    </header>
+
+    <div class="container">
+        <!-- Parte 1: Recebimento de Dados (AJAX GET) -->
+        <section class="card">
+            <h2>1. Carregar "dados.json" (GET)</h2>
+            <p>Conecta ao servidor via AJAX e converte o JSON retornado.</p>
+
+            <button id="btn-carregar" onclick="carregarComAjax()">⬇️ Buscar Dados via AJAX</button>
+
+            <div id="resultado-perfil" class="perfil-visual oculto"></div>
+            <pre id="json-recebido" class="json-box oculto"></pre>
+        </section>
+
+        <!-- Parte 2: Preparação de Envio de Dados -->
+        <section class="card">
+            <h2>2. Preparar Dados para Envio</h2>
+            <p>Altere os dados para gerar uma nova String JSON.</p>
+
+            <div class="formulario">
+                <label>Nome do Aluno:</label>
+                <input type="text" id="novo-nome" placeholder="Aguardando carga..." disabled>
+
+                <label>Nota Atual:</label>
+                <input type="number" id="nova-nota" placeholder="Aguardando carga..." disabled>
+
+                <label>Matérias (separadas por vírgula):</label>
+                <input type="text" id="novas-materias" placeholder="Aguardando carga..." disabled>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="novo-matriculado" disabled>
+                    <label for="novo-matriculado">Aluno está Matriculado?</label>
+                </div>
+
+                <button id="btn-enviar" onclick="salvarEDownload()" disabled>⬆️ Gerar e Baixar (JSON.stringify)</button>
+            </div>
+
+            <pre id="json-enviado" class="json-box oculto"></pre>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
